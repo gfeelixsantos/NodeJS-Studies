@@ -20,3 +20,9 @@ INSERT INTO "nome da tabela" ("informa campos , ...") VALUES ("ordem dos campos 
 
 -- Listar dados
 SELECT "selecao (* monstra todos)" FROM "nome da tabela"
+
+-- Deletar dado
+DELETE FROM "nome tabela" WHERE "condição para deletar"
+
+-- Atualizar dado
+UPDATE "nome tabela" SET "nome do campo = novo valor" WHERE "condição para registro específico"

@@ -12,6 +12,13 @@ Banco de Dados (MySQL)
 - Sempre add ";" ao final do comando SQL
 - Arquivo teste.sql possuí algumas orientações de uso
 
-último vídeo #14 [https://www.youtube.com/watch?v=QA2pmm8FC60&list=PLJ_KhUnlXUPtbtLwaxxUxHqvcNQndmI4B&index=14]
+
+Sequelize (ORM)
+- Documentation [https://sequelize.org/docs/v6/getting-started/]
+
+Express-Handlebars
+- Documentation [https://www.npmjs.com/package/express-handlebars]
 
 
+
+Ultima Aula #23 - Estruturando Banco de Dados
