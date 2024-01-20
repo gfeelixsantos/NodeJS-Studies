@@ -1,18 +1,5 @@
 const Sequelize = require('sequelize')
-
-const conectDatabase = () => {
-    // Configurando conexão com banco local
-    const sequelize = new Sequelize('sistemadecadastro', 'root', '123456', { host: 'localhost', dialect:'mysql' })
-
-    try {
-        sequelize.authenticate()
-        console.log('CONECTADO COM SUCESSO');
-    } catch (error) {
-        console.log('FALHA AO CONECTAR COM BANCO', error);
-    }
-
-}
-
+const sequelize = new Sequelize('postapp', 'root', '123456', { host: 'localhost', dialect:'mysql' });
 
                     // Criando Model para que o Sequelize criar no banco de dados.
 // const Postagens = sequelize.define('postagens', {
@@ -44,4 +31,7 @@ const conectDatabase = () => {
 // })
 
 
-module.exports = conectDatabase
+module.exports = {
+    Sequelize: Sequelize,
+    sequelize: sequelize
+};

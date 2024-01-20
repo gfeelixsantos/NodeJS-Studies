@@ -18,7 +18,6 @@ Sequelize (ORM)
 
 Express-Handlebars
 - Documentation [https://www.npmjs.com/package/express-handlebars]
+- Help Documentation [https://github.com/ericdouglas/traduz-ai/blob/master/handlebars/001-aprenda-tudo-sobre-handlebars.md]
 
-
-
-Ultima Aula #23 - Estruturando Banco de Dados
+>> Ultima aula #25 - Listando dados do banco

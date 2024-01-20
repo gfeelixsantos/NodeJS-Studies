@@ -1,0 +1,10 @@
+<h1>Lista de posts</h1>
+
+    {{#each postagem }}
+        <h3>{{ titulo }}</h3>
+        <p>{{ conteudo }}</p>
+        <hr>
+    {{/each }}
+
+    <button><a href="http://localhost:3031/cadastrar" style="text-decoration: none;">NOVO POST</a></button>
+
