@@ -1,0 +1,10 @@
+<h1>Alterar POST</h1>
+<form action="/atualizar/{{ postagem.id }}" method="post">
+    <label>Título</label>
+    <input type="text" name="titulo" value="{{ postagem.titulo }}"><br>
+    <label>Conteúdo</label>
+    <textarea name="conteudo" cols="15" rows="3">{{ postagem.conteudo }}</textarea>
+    <button type="submit">ATUALIZAR!</button>
+</form>
+ 
+    

@@ -20,4 +20,7 @@ Express-Handlebars
 - Documentation [https://www.npmjs.com/package/express-handlebars]
 - Help Documentation [https://github.com/ericdouglas/traduz-ai/blob/master/handlebars/001-aprenda-tudo-sobre-handlebars.md]
 
->> Ultima aula #25 - Listando dados do banco
+Mongoose
+- Documentation [https://mongoosejs.com/]
+
+>> Ultima aula #31 - Iniciando projeto express

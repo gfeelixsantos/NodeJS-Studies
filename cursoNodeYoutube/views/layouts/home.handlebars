@@ -3,8 +3,10 @@
     {{#each postagem }}
         <h3>{{ titulo }}</h3>
         <p>{{ conteudo }}</p>
+        <a href="/alterar/{{ id }}"><button>ALTERAR</button></a>
+        <a href="/deletar/{{ id }}"><button>EXCLUIR</button></a>
         <hr>
     {{/each }}
 
-    <button><a href="http://localhost:3031/cadastrar" style="text-decoration: none;">NOVO POST</a></button>
+    <a href="http://localhost:3031/cadastrar" style="text-decoration: none;"><button style="cursor: pointer;">NOVO POST</button></a>
 
