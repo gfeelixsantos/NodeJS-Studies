@@ -23,4 +23,4 @@ Express-Handlebars
 Mongoose
 - Documentation [https://mongoosejs.com/]
 
->> Ultima aula #31 - Iniciando projeto express
+>> Ultima aula #40 - Como validar formulários

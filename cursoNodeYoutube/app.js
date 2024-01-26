@@ -1,89 +1,54 @@
+// Carregando Express
 const express = require('express');
 const app = express()
-const bodyParser = require('body-parser')
-const { engine } = require('express-handlebars');
-const Post = require('./models/Post');
+
+// Carregando demais módulos
+const path = require('path')
 const port = process.env.PORT || 3031
 
-
 // Configurando Template Engine
+const { engine } = require('express-handlebars');
 app.engine('handlebars', engine())
 app.set('view engine', 'handlebars')
 app.set('views', './views')
 
 // Configuração Body-Parser
+const bodyParser = require('body-parser')
 app.use(bodyParser.urlencoded({ extended:false }))
 app.use(bodyParser.json())
 
-//...................... Rotas GET
+// Configuração de pasta de arquivos estáticos
+app.use(express.static(path.join(__dirname, 'public')))
 
-// LE TODOS OS POST DO BANCO DE DADOS
-app.get('/', async(req, res) => {
-    const postagem = await Post.findAll({ raw: true, order:[['id', 'DESC']] })
-    res.render('./layouts/home', { postagem: postagem })
- 
-})
-
-
-app.get('/cadastrar', (req, res) => {
-    res.render('./layouts/formulario')
-})
-
-// DELETA UM POST
-app.get('/deletar/:id', (req, res) => {
-    try {
-        Post.destroy({ where: {'id': req.params.id} })
-        res.render('./layouts/alert')
-        
-    } catch (error) {
-        res.send('Erro ao deletar', error)
+// Configurações de sessão do usuário
+const session = require('express-session')
+const flash = require('connect-flash')
+app.use( session(
+    {
+        secret: 'cursodenodejs',
+        resave: true,
+        saveUninitialized: true
     }
+))
+app.use(flash())
+
+// Configuração do Middleware (Locals - variável global)
+app.use( (req, res, next) => {
+    res.locals.success_msg = req.flash('success_msg')
+    res.locals.error_msg = req.flash('error_msg')
+    next()
 })
 
-app.get('/alterar/:id', async(req, res) => {
-    const postagem = await Post.findByPk(req.params.id, { raw: true })
-    res.render('./layouts/change', { postagem: postagem })
-})
+// Configuração de Rotas
+const admin = require('./routers/admin')
+app.use('/admin', admin)
 
-
-//...................... Rotas POST
-
-// ADICIONA UM NOVO POST
-app.post('/add', async(req, res) => {
-    console.log(req.body);
-    try{
-       await Post.create({
-            titulo: req.body.titulo,
-            conteudo: req.body.conteudo
-        })
-        res.redirect('/')
-
-    } catch(error) {
-        res.send('Falha ao enviar post', error)
-    }
-
-})
-
-// ATUALIZA NOVO POST
-app.post('/atualizar/:id', async (req, res) => {
-    try {
-        await Post.update(
-        {
-            titulo: req.body.titulo,
-            conteudo: req.body.conteudo
-        }, 
-        {
-            where: { id: req.params.id }
-        })
-        res.redirect('/')
-
-    } catch (error) {
-        res.send('Error ao atualizar!', error)
-    }
-})
-
-
-
+// Configuração banco de dados (MongoDB)
+const mongoose = require('mongoose')
+mongoose.Promise = global.Promise
+mongoose.connect('mongodb://127.0.0.1:27017/blogapp')
+    .then( () => console.log('Conectado ao banco MongoDB'))
+    .catch( (error) => console.log('Erro ao conectar com banco', error))
 
 
 // Iniciando Servidor

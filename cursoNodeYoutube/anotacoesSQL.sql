@@ -26,3 +26,5 @@ DELETE FROM "nome tabela" WHERE "condição para deletar"
 
 -- Atualizar dado
 UPDATE "nome tabela" SET "nome do campo = novo valor" WHERE "condição para registro específico"
+
+
