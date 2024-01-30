@@ -1,3 +1,12 @@
 <h2>Lista de categorias</h2>
-<hr>
+
+{{#each categorias}}
+    <p class="mt-4">{{nome}}</p>
+    <hr>
+{{else}}
+
+{{/each}}
+
+
+
 <a href="/admin/categorias/add"><button class="btn btn-success">Nova categoria</button></a>

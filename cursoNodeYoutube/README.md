@@ -23,4 +23,4 @@ Express-Handlebars
 Mongoose
 - Documentation [https://mongoosejs.com/]
 
->> Ultima aula #40 - Como validar formulários
+>> Ultima aula #41 - Listando categorias

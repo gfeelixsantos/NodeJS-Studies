@@ -1,3 +1,4 @@
+const { json } = require('body-parser')
 const express = require('express')
 const router = express.Router()
 
@@ -14,8 +15,10 @@ router.get('/post', (req, res) => {
     res.send('Página de posts')
 })
 
-router.get('/categorias', (req, res) => {
-    res.render('./admin/categorias')
+router.get('/categorias', async(req, res) => {
+    const categorias = await Categoria.find().sort({nome: 'asc'})
+    console.log(categorias);
+    res.render('./admin/categorias', { categorias: categorias.map( categoria => categoria.toJSON())})
 })
 
 router.get('/categorias/add', (req, res) => {
