@@ -1,4 +1,3 @@
-const { json } = require('body-parser')
 const express = require('express')
 const router = express.Router()
 
@@ -17,12 +16,25 @@ router.get('/post', (req, res) => {
 
 router.get('/categorias', async(req, res) => {
     const categorias = await Categoria.find().sort({nome: 'asc'})
-    console.log(categorias);
     res.render('./admin/categorias', { categorias: categorias.map( categoria => categoria.toJSON())})
 })
 
 router.get('/categorias/add', (req, res) => {
     res.render('./admin/categoriaadd')
+})
+
+router.get('/categorias/edit/:id', async(req, res) => {
+
+    try {
+
+        const buscaCategoria = await Categoria.findOne({ _id: req.params.id })
+        res.render('./admin/editcategoria', { buscaNome: buscaCategoria.nome,  buscaSlug: buscaCategoria.slug, buscaId: buscaCategoria.id})
+        console.log(buscaCategoria);
+
+    } catch (error) {
+        req.flash('error_msg', 'Erro ao atualizar categoria')
+        res.redirect('/admin/categorias')
+    }
 })
 
 router.post('/categorias/nova', (req, res) => {
@@ -59,5 +71,34 @@ router.post('/categorias/nova', (req, res) => {
     }
 
 })
+
+router.post('/categorias/edit', async(req, res) => {
+
+    try {
+        await Categoria.findByIdAndUpdate( { _id: req.body.idCategoria }, { nome: req.body.nome, slug: req.body.slug })
+        req.flash('success_msg', 'Categoria alterada com sucesso !')
+        res.redirect('/admin/categorias')
+
+    } catch (error) {
+        console.log(error);
+        req.flash('error_msg', 'Erro ao editar a categoria')
+        res.redirect('/admin/categorias')
+    }
+})
+
+router.post('/categorias/excluir', async(req, res) => {
+    console.log(req.body);
+    try {
+        await Categoria.findOneAndDelete({ _id: req.body.idCategoria })
+        req.flash('success_msg', 'Categoria deletada !')
+        res.redirect('/admin/categorias')
+
+    } catch (error) {
+        console.log(error);
+        req.flash('error_msg', 'Erro ao deletar a categoria')
+        res.redirect('/admin/categorias')
+    }
+})
+
 
 module.exports = router

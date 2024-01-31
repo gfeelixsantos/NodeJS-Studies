@@ -1,7 +1,13 @@
 <h2>Lista de categorias</h2>
 
 {{#each categorias}}
-    <p class="mt-4">{{nome}}</p>
+    <h6 class="mt-4">{{ nome }} ✔</h6>
+    <p>{{ slug }}</p>
+    <a href="/admin/categorias/edit/{{ _id }}"><button class="btn btn-primary btn-sm">Editar</button></a>
+    <form action="/admin/categorias/excluir" method="post">
+        <input type="hidden" name="idCategoria" value="{{ _id }}">
+        <button type="submit" class="btn btn-danger btn-sm mt-2">Excluir</button>
+    </form>
     <hr>
 {{else}}
 
@@ -9,4 +15,4 @@
 
 
 
-<a href="/admin/categorias/add"><button class="btn btn-success">Nova categoria</button></a>
+<a href="/admin/categorias/add"><button class="btn btn-success mb-10">Nova categoria</button></a>
