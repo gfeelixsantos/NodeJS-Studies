@@ -23,4 +23,4 @@ Express-Handlebars
 Mongoose
 - Documentation [https://mongoosejs.com/]
 
->> Assistir aula #44 - Difinindo model postagens
+>> Assistir aula #46 - Salvando Postagens

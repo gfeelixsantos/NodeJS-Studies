@@ -7,11 +7,21 @@ require('../models/Categoria')
 const Categoria = mongoose.model('categorias')
 
 router.get('/', (req, res) => {
-    res.render('./admin/index')
+    res.send('Index')
 })
 
-router.get('/post', (req, res) => {
-    res.send('Página de posts')
+router.get('/postagens', (req, res) => {
+    res.render('./admin/postagens')
+})
+
+router.get('/postagens/add', async(req, res) => {
+    try {
+        const listagemCategorias = await Categoria.find()
+        res.render('./admin/postagensadd', { listagemCategorias: listagemCategorias.map( e => e.toJSON())})
+    } catch (error) {
+        req.flash('error_msg', 'Erro ao criar nova postagem')
+        res.redirect('/admin/postagens')
+    }
 })
 
 router.get('/categorias', async(req, res) => {
@@ -36,6 +46,9 @@ router.get('/categorias/edit/:id', async(req, res) => {
         res.redirect('/admin/categorias')
     }
 })
+
+/* ROTAS POSTS
+............................................................................................................................................*/
 
 router.post('/categorias/nova', (req, res) => {
 
