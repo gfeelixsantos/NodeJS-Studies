@@ -23,4 +23,4 @@ Express-Handlebars
 Mongoose
 - Documentation [https://mongoosejs.com/]
 
->> Assistir aula #46 - Salvando Postagens
+>> última aula #50 - Criando a Home Page

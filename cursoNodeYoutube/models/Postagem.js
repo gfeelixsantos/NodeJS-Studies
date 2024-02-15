@@ -7,8 +7,8 @@ const Postagem = new Schema({
         required: true
     },
     categoria: {
-        type: Schema.Types.ObjectId,
-        ref: "categorias",
+        type: Schema.Types.String,
+        // ref: "categorias",
         required: true
     },
     conteudo: {

@@ -1,7 +1,12 @@
 <h2>Postagens</h2>
-<h6 class="mt-4">titulo</h6>
-<p>categoria</p>
-<p>conteudo</p>
-<p>data</p>
+{{#each listaPostagens}}
+<form action="/admin/postagem/delete/{{ _id}}" method="post">
+    <input type="hidden" name="idPostagem" value={{_id}}>
+    <h6 class="mt-4">{{ titulo }} <span>[{{ categoria }}]  <button class="btn btn-outline-danger btn-sm" type="submit">Excluir</button></span></h6>
+    <p>{{ conteudo }}</p>
+    <small>{{ data }}</small>
+</form>
+<a href="/admin/postagem/edit/{{ _id }}"><button class="btn btn-outline-primary btn-sm">Editar</button></a>
 <hr>
-<a href="/admin/postagens/add"><button class="btn btn-success btn-sm">Adicionar</button></a>
+{{/each}}
+<a href="/admin/postagens/add"><button class="btn btn-success btn-sm mb-4">Nova Postagem</button></a>
