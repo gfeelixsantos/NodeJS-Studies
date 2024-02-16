@@ -41,7 +41,10 @@ app.use( (req, res, next) => {
 
 // Configuração de Rotas
 const admin = require('./routers/admin')
+const usuario = require('./routers/usuario')
 app.use('/admin', admin)
+app.use('/usuario', usuario)
+
 
 // Configuração banco de dados (MongoDB)
 const mongoose = require('mongoose')
@@ -49,6 +52,37 @@ mongoose.Promise = global.Promise
 mongoose.connect('mongodb://127.0.0.1:27017/blogapp')
     .then( () => console.log('Conectado ao banco MongoDB'))
     .catch( (error) => console.log('Erro ao conectar com banco', error))
+
+
+// Configuração Home-Page
+const Postagem = mongoose.model('postagens')
+const Categoria = mongoose.model('categorias')
+
+app.get('/', async(req, res) => {
+    
+    try {
+        const listaPostagem = await Postagem.find().sort({ data: "desc" })
+        res.render('./index', { listaPostagem: listaPostagem.map( e => e.toJSON()) })
+        
+    } catch (error) {
+        req.flash('error_msg', 'Um erro foi identificado...')
+        res.redirect('/404')
+    }
+})
+
+app.get('/filtropostagem/:categoria', async (req, res) => {
+
+    const listaPostagem = await Postagem.find({ categoria: req.params.categoria })
+    res.render('./filtropostagem', { listaPostagem: listaPostagem.map( e => e.toJSON()), grupo: req.params.categoria })
+})
+
+app.get('/categorias', async (req, res) => {
+
+    const listaCategorias = await Categoria.find()
+    res.render('./categorias', {listaCategorias: listaCategorias.map( e => e.toJSON())})
+})
+
+
 
 
 // Iniciando Servidor

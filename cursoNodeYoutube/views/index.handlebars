@@ -1,0 +1,28 @@
+<div class="jumbotron">
+  <h1 class="display-4">Bem vindo,</h1>
+  <p class="lead">Este projeto foi desenvolvido no curso de NodeJS com o objetivo de um blog de postagens.</p>
+  <a class="btn btn-primary btn-md mb-5" href="#" role="button">Cadastre-se</a>
+  <hr class="my-2">
+</div>
+
+<div class="mt-3">
+  <h5>Últimas postagens</h5>
+</div>
+<section style="display: flex; gap: .3rem; flex-wrap: wrap;">
+  {{#each listaPostagem }}
+      <div class="card border-primary mb-3 text-left" style="max-width: 24rem;">
+          <div class="card-header"><small>Categoria: {{ categoria }}</small></div>
+          <div class="card-body">
+              <h6 class="card-title" style="text-align: center;">{{ titulo }}</h6>
+              <p class="card-text" style="text-align: center;">{{ conteudo }}</p>
+              <div style="display: flex; justify-content:right;">
+                <a href="./filtropostagem/{{ categoria }}" class="btn btn-secondary btn-sm text-light" role="button">Leia mais</a>
+              </div>
+          </div>
+      </div>
+      {{else }}
+      <p>Sem postagens no momento...</p>
+  {{/each }}
+
+
+</section>

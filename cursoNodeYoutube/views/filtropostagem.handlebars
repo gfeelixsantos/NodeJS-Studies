@@ -1,0 +1,17 @@
+<h4>Categoria: {{ grupo }}</h4>
+{{#each listaPostagem }}
+    <div class="card border-primary mb-3 text-left" style="max-width: 24rem;">
+        <h6 class="card-header">{{ titulo }}</h6>
+        <div class="card-body">
+            <p class="card-text">{{ conteudo }}</p>
+        </div>
+    </div>
+    {{else }}
+    <p>Sem postagens no momento...</p>
+{{/each }}
+<button class="btn btn-primary btn-sm mt-5" onclick="goBack()">Voltar</button>
+<script>
+    function goBack(){
+        window.history.back()
+    }
+</script>

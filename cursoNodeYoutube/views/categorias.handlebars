@@ -1,0 +1,9 @@
+<h2>Lista de categorias</h2>
+
+{{#each listaCategorias}}
+    <h6 class="mt-4"><a href="/filtropostagem/{{ nome }}" style="text-decoration: none;" >{{ nome }}</a></h6>
+    <small style="color:#2375FD">Sigla: {{ slug }}</small>
+    <hr>
+{{else}}
+    <p>Sem categorias para exibir</p>
+{{/each}}
