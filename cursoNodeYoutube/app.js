@@ -2,6 +2,13 @@
 const express = require('express');
 const app = express()
 
+// Passport para autenticação
+const passport = require('passport')
+
+// Carregando arquivos de configurações
+const authUsuario = require('./config/auth')
+authUsuario(passport)
+
 // Carregando demais módulos
 const path = require('path')
 const port = process.env.PORT || 3031
@@ -30,12 +37,18 @@ app.use( session(
         saveUninitialized: true
     }
 ))
+
+app.use(passport.initialize())
+app.use(passport.session())
+
 app.use(flash())
 
 // Configuração do Middleware (Locals - variável global)
 app.use( (req, res, next) => {
     res.locals.success_msg = req.flash('success_msg')
     res.locals.error_msg = req.flash('error_msg')
+    res.locals.error = req.flash('error')
+    res.locals.user = req.user || null
     next()
 })
 
@@ -48,10 +61,14 @@ app.use('/usuario', usuario)
 
 // Configuração banco de dados (MongoDB)
 const mongoose = require('mongoose')
-mongoose.Promise = global.Promise
-mongoose.connect('mongodb://127.0.0.1:27017/blogapp')
-    .then( () => console.log('Conectado ao banco MongoDB'))
-    .catch( (error) => console.log('Erro ao conectar com banco', error))
+// mongoose.Promise = global.Promise
+// mongoose.connect('mongodb://127.0.0.1:27017/blogapp')
+mongoose.connect(`mongodb+srv://blogapp:<010203>@blogapp.virrwyh.mongodb.net/?retryWrites=true&w=majority`, { dbName: 'blogapp'})
+const connection = mongoose.connection
+connection.on('error', () => console.log('Erro ao conectar com o banco'))
+connection.on('open', () => console.log('Banco conectado'))
+    // .then( () => console.log('Conectado ao banco MongoDB'))
+    // .catch( (error) => console.log('Erro ao conectar com banco', error))
 
 
 // Configuração Home-Page

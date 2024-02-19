@@ -1,0 +1,21 @@
+<div class="card">
+    {{#each errors}}
+        <div class="alert alert-danger" style="padding: .5rem; margin: .5rem 1rem; max-width: 28rem;">{{ texto }}</div>
+        {{else}}
+
+    {{/each}}
+    <div class="card-body">
+        <h4>Cadastrar-se</h4>
+        <form action="/usuario/cadastro" method="post">
+            <label for="nome">Nome</label>
+            <input type="text" name="nome" id="nome" class="form-control" style="max-width: 16rem;">
+            <label for="email">Email</label>
+            <input type="email" name="email" id="email" class="form-control" style="max-width: 16rem;">
+            <label for="senha">Senha</label>
+            <input type="password" name="senha" id="senha" class="form-control" style="max-width: 16rem;" >
+            <label for="confirmaSenha">Repita senha</label>
+            <input type="password" name="confirmaSenha" id="confirmaSenha" class="form-control" style="max-width: 16rem;" >
+            <button type="submit" class="btn btn-info text-light mt-5">Cadastrar</button>
+        </form>
+    </div>
+</div>

@@ -23,4 +23,10 @@ Express-Handlebars
 Mongoose
 - Documentation [https://mongoosejs.com/]
 
+Bcryptjs
+- Documentation [https://www.npmjs.com/package/bcryptjs]
+
+Passaportjs
+- Documentation [https://www.passportjs.org/docs/]
+
 >> última aula #50 - Criando a Home Page

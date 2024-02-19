@@ -1,5 +1,6 @@
 const express = require('express')
 const router = express.Router()
+const { isAdmin } = require('../helpers/isAdmin')
 
 // Importando informações do banco para registrar na rota POST
 const mongoose = require('mongoose')
@@ -8,7 +9,7 @@ const Categoria = mongoose.model('categorias')
 require('../models/Postagem')
 const Postagem = mongoose.model('postagens')
 
-router.get('/', (req, res) => {
+router.get('/', isAdmin, (req, res) => {
     res.send('Index')
 })
 
@@ -17,7 +18,7 @@ router.get('/postagens', async (req, res) => {
     res.render('./admin/postagens', { listaPostagens: listaPostagens.map( e => e.toJSON()) })
 })
 
-router.get('/postagens/add', async(req, res) => {
+router.get('/postagens/add', isAdmin, async(req, res) => {
     try {
         const listagemCategorias = await Categoria.find()
         res.render('./admin/postagensadd', { listagemCategorias: listagemCategorias.map( e => e.toJSON())})
@@ -28,7 +29,7 @@ router.get('/postagens/add', async(req, res) => {
     }
 })
 
-router.get('/postagem/edit/:id', async (req, res) => {
+router.get('/postagem/edit/:id', isAdmin, async (req, res) => {
     const buscaPostagem = await Postagem.findOne({ _id: req.params.id })
     const categorias = await Categoria.find().sort({nome: 'asc'})
     res.render('./admin/editpostagens', { buscaPostagem: buscaPostagem.toJSON(), categorias: categorias.map( categorias => categorias.toJSON()) })
@@ -39,11 +40,11 @@ router.get('/categorias', async(req, res) => {
     res.render('./admin/categorias', { categorias: categorias.map( categoria => categoria.toJSON())})
 })
 
-router.get('/categorias/add', (req, res) => {
+router.get('/categorias/add', isAdmin, (req, res) => {
     res.render('./admin/categoriaadd')
 })
 
-router.get('/categorias/edit/:id', async(req, res) => {
+router.get('/categorias/edit/:id', isAdmin, async(req, res) => {
 
     try {
 
