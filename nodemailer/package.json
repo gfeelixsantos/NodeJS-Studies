@@ -1,0 +1,19 @@
+{
+  "name": "nodemailer",
+  "version": "1.0.0",
+  "description": "Projeto teste do pacote nodemailer para envios de emails.",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [
+    "nodemailer",
+    "email",
+    "email_teste"
+  ],
+  "author": "Gabriel Felix",
+  "license": "ISC",
+  "dependencies": {
+    "nodemailer": "^6.9.13"
+  }
+}
