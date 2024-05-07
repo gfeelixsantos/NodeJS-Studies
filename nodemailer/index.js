@@ -1,21 +1,18 @@
 const nodemailer = require('nodemailer')
 
-const emailGmail = 'felix.devx@gmail.com';
-const passGmail = '1416Felix$'
-
 const transporter = nodemailer.createTransport({
-    host: 'mail.cmsocupacional.com.br',
+    host: '',
     port: 465,
     // secure: true,
     auth:{
-        user: 'esocial@cmsocupacional.com.br',
-        pass: 'esocial@2021'
+        user: EMAIL_USER,
+        pass: EMAIL_PASS
     }
 });
 
 const mailOptions = {
-    from: emailGmail,
-    to: 'esocial@cmsocupacional.com.br',
+    from: '...email from.....',
+    to: EMAIL_USER,
     subject: 'Nodemailer teste de envio',
     html: `<h1>Este é um email teste utilizando nodemailer em NodeJS </h1>😄👍
     <img src="C:\\Users\\FELIX\\Pictures\\LOGO-GRASIFS.png" />`,
